@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import slug from 'slug'
+
 import User from "../models/User"
 import { checkPassword, hashPasword } from '../utils/auth'
 import { generateJWt } from '../utils/jwt'
@@ -61,4 +62,8 @@ export const login = async (req: Request, res: Response) => {
     }
     const token = generateJWt({ id: user._id })
     res.send(token)
+}
+
+export const getUser = async (req: Request, res: Response) => {
+    res.json(req.user)
 }
